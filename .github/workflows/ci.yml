@@ -101,7 +101,7 @@ jobs:
       - name: Try to remove a baum dir on root path
         run: whoami && sudo rm -Rf /baum
 
-  build-docker-image:
+  build-backend-docker-image:
     runs-on: ubuntu-latest
     steps:
       -
@@ -120,5 +120,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v3
         with:
+          context: "{{defaultContext}}:backend"
           push: true
           tags: erdbeerheld1990/client:latest
