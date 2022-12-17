@@ -48,7 +48,6 @@ jobs:
           username: postgres
           password: postgres
           url: 'jdbc:postgresql://postgres:5432/postgres'
-        run: whoami
         # with:
         #   operation: 'update'
         #   classpath: 'db-setup/changelogs'
