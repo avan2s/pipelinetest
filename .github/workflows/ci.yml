@@ -48,7 +48,7 @@ jobs:
           username: postgres
           password: postgres 
           url: 'jdbc:postgresql://postgres:5432/postgres'
-          args: ---log-level to INFO
+          args: '--log-level=debug'
 
       - name: Connect to PostgreSQL
         # Runs a script that creates a PostgreSQL table, populates
