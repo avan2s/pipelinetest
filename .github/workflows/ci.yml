@@ -48,7 +48,7 @@ jobs:
           # username: postgres
           # password: postgres
           # url: 'jdbc:postgresql://postgres:5432/postgres'
-          args: --url="jdbc:postgresql://postgres:5432/postgres" --changeLogFile=./extra/Docker/changeLog.h2.sql --username=postgres --password=postgres --logLevel=debug update
+          args: --url="jdbc:postgresql://postgres:5432/postgres" --changeLogFile=./db-setup/changelog/changelog-root.xml --username=postgres --password=postgres --logLevel=debug update
 
       - name: Connect to PostgreSQL
         # Runs a script that creates a PostgreSQL table, populates
