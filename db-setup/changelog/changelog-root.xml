@@ -15,30 +15,21 @@
     <!-- changes for each version -->
     <!-- <include file="changelog-1.0.xml" relativeToChangelogFile="true" /> -->
 
-    <changeSet id="create-tenant2-table" author="avh">
-        <comment>Add tenant table</comment>
-        <createTable tableName="tenant2">
-            <column name="id" type="bigint" autoIncrement="true" startWith="100" incrementBy="1">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_tenant"/>
+    <changeSet id="create-student-table" author="avh">
+        <comment>Add student table</comment>
+        <createTable tableName="student">
+            <column name="id" type="int" autoIncrement="true" startWith="100" incrementBy="1">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_student"/>
             </column>
-            <column name="name" type="varchar(100)">
+            <column name="firstname" type="varchar(80)">
                 <constraints nullable="false"/>
             </column>
-            <column name="acronym" type="varchar(20)">
+            <column name="lastname" type="varchar(80)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="btp_subbaccount_id" type="varchar(200)"/>
-            <column name="created_at" type="datetime" defaultValueComputed="${current-timestamp}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="created_by" type="varchar(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="updated_at" type="datetime"/>
-            <column name="updated_by" type="varchar(50)"/>
+            <column name="age" type="int"/>
+            <column name="address" type="varchar(120)"/>
         </createTable>
-        <addUniqueConstraint columnNames="acronym" tableName="tenant2" constraintName="uq_tenant_acronym"/>
-        <addUniqueConstraint columnNames="name" tableName="tenant2" constraintName="uq_tenant_name"/>
     </changeSet>
 
 </databaseChangeLog>
