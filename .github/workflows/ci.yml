@@ -40,6 +40,14 @@ jobs:
         run: npm ci --prefix backend
       
       - name: 'Run liquibase action'
+      - uses: liquibase/liquibase-github-action@v2
+        with:
+          operation: 'update'
+          classpath: 'db-setup/changelog'
+          changeLogFile: 'changelog-root.xml'
+          username: postgres
+          password: postgres
+          url: 'jdbc:postgresql://postgres:5432/postgres'
         run: whoami
         # with:
         #   operation: 'update'
