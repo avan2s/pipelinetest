@@ -40,7 +40,6 @@ jobs:
         run: npm ci --prefix backend
       
       - name: 'Run liquibase action'
-        container: hello-world
         run: whoami
         # with:
         #   operation: 'update'
