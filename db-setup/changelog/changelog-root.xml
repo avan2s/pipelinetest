@@ -13,24 +13,6 @@
     <property name="blob_type" value="blob" dbms="oracle"/>
 
     <!-- changes for each version -->
-    <!-- <include file="changelog-1.0.xml" relativeToChangelogFile="true" /> -->
-
-    <changeSet id="create-student-table" author="avh">
-        <comment>Add student table</comment>
-        <createTable tableName="student">
-            <column name="id" type="int" autoIncrement="true" startWith="100" incrementBy="1">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_student"/>
-            </column>
-            <column name="firstname" type="varchar(80)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="lastname" type="varchar(80)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="age" type="int"/>
-            <column name="address" type="varchar(120)"/>
-            <column name="email" type="varchar(120)"/>
-        </createTable>
-    </changeSet>
+    <include file="changelog-1.0.xml" relativeToChangelogFile="true" />
 
 </databaseChangeLog>
