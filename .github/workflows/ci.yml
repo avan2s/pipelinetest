@@ -4,7 +4,6 @@ on: push
 jobs:
   # Label of the container job
   container-job:
-    if: ${{ false }}  # disable for now
     # Containers must run in Linux based operating systems
     runs-on: [self-hosted]
     # Docker Hub image that `container-job` executes in
