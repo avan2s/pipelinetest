@@ -22,13 +22,13 @@ pgclient.query(text, values, (err, res) => {
     if (err) throw err
 });
 
-pgclient.query('SELECT * FROM student', (err, res) => {
-    if (err) throw err
-    console.log(err, res.rows) // Print the data in student table
-    pgclient.end()
-});
+// pgclient.query('SELECT * FROM student', (err, res) => {
+//     if (err) throw err
+//     console.log(err, res.rows) // Print the data in student table
+//     pgclient.end()
+// });
 
-pgclient.query('SELECT * FROM tenant', (err, res) => {
+pgclient.query('SELECT * FROM tenant2', (err, res) => {
     if (err) throw err
     console.log(err, res.rows) // Print the data in student table
     pgclient.end()
