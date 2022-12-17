@@ -44,10 +44,11 @@ jobs:
         with:
           operation: 'update'
           classpath: 'db-setup/changelog'
-          changeLogFile: 'changelog-root.xml --logLevel=debug'
+          changeLogFile: 'changelog-root.xml'
           username: postgres
           password: postgres 
           url: 'jdbc:postgresql://postgres:5432/postgres'
+          args: --logLevel=debug
 
       - name: Connect to PostgreSQL
         # Runs a script that creates a PostgreSQL table, populates
