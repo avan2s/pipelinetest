@@ -121,5 +121,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: "{{defaultContext}}:backend"
+          platforms: "linux/amd64,linux/arm64"
           push: true
           tags: erdbeerheld1990/client:latest
