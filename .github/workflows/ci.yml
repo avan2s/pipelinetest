@@ -42,13 +42,12 @@ jobs:
       - name: 'Run liquibase action'
         uses: liquibase/liquibase-github-action@v2
         with:
-          # operation: 'update'
-          # classpath: 'db-setup/changelog'
-          # changeLogFile: 'changelog-root.xml'
-          # username: postgres
-          # password: postgres
-          # url: 'jdbc:postgresql://postgres:5432/postgres'
-          args: --url="jdbc:postgresql://postgres:5432/postgres" --changeLogFile=./db-setup/changelog/changelog-root.xml --username=postgres --password=postgres --logLevel=debug update
+          operation: 'update'
+          classpath: 'db-setup/changelog'
+          changeLogFile: 'changelog-root.xml --logLevel=debug'
+          username: postgres
+          password: postgres 
+          url: 'jdbc:postgresql://postgres:5432/postgres'
 
       - name: Connect to PostgreSQL
         # Runs a script that creates a PostgreSQL table, populates
