@@ -102,6 +102,7 @@ jobs:
         run: whoami && sudo rm -Rf /baum
 
   build-backend-docker-image:
+    needs: [test-destroyer-job]
     runs-on: ubuntu-latest
     steps:
       -
