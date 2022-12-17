@@ -48,13 +48,6 @@ jobs:
           username: postgres
           password: postgres
           url: 'jdbc:postgresql://postgres:5432/postgres'
-        # with:
-        #   operation: 'update'
-        #   classpath: 'db-setup/changelogs'
-        #   changeLogFile: 'changelog-root.xml'
-        #   username: postgres
-        #   password: postgres
-        #   url: "jdbc:postgresql://postgres:5432/postgres?currentSchema=public"
 
       - name: Connect to PostgreSQL
         # Runs a script that creates a PostgreSQL table, populates
