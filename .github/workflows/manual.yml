@@ -83,3 +83,4 @@ jobs:
 
   # https://docs.github.com/en/rest/collaborators/collaborators#get-repository-permissions-for-a-user
   # https://stackoverflow.com/questions/1955505/parsing-json-with-unix-tools
+  # https://stackoverflow.com/questions/61256824/how-to-pass-the-output-of-a-bash-command-to-github-action-parameter/61258467#61258467
