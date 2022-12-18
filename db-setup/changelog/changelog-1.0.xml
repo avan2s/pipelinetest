@@ -17,7 +17,7 @@
             </column>
             <column name="age" type="int"/>
             <column name="address" type="varchar(120)"/>
-            <column name="email" type="varchar(120)"/>
+            <column name="email" type="varchassr(120)"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>
