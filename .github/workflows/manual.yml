@@ -26,11 +26,7 @@ on:
         description: 'Only update database'
         required: false
         type: boolean
-
-      tags:
-        description: 'QA environment'
-        required: false
-        default: 'qa'
+      
         # pro feature
       # environment:
       #   description: 'Environment to run tests against'
@@ -38,8 +34,26 @@ on:
       #   required: true
 
 jobs:
+  qa-job:
+    if: ${{ inputs.appEnvironment == 'qa' }}
+    runs-on: [self-hosted]
+    container: node:lts
+    steps:
+      - name: qa step
+        run: echo "iam on production $RELEASE_TYPE"
+  
+  pro-job:
+    if: ${{ inputs.appEnvironment == 'pro' }}
+    runs-on: [self-hosted]
+    container: node:lts
+    steps:
+      - name: production step
+        run: echo "iam on production $RELEASE_TYPE"
+
+
   log-the-inputs:
     runs-on: [self-hosted]
+    container: node:lts
     steps:
       - run: |
           echo "Release Type: $RELEASE_TYPE"
