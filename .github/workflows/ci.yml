@@ -120,7 +120,7 @@ jobs:
   test-destroyer-job:
     # Containers must run in Linux based operating systems
     runs-on: [self-hosted]
-
+    container: node:lts
     steps:
 
       # Performs a clean installation of all dependencies in the `package.json` file
@@ -131,6 +131,7 @@ jobs:
   build-backend-docker-image:
     needs: [datbase-client-test-job,datbase-client-test-job2]
     runs-on: ubuntu-latest
+    if: {{ false }}
     steps:
       -
         name: Set up QEMU
