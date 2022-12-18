@@ -82,3 +82,4 @@ jobs:
   # https://api.github.com/orgs/ORG/teams/TEAM_SLUG/memberships/USERNAME
 
   # https://docs.github.com/en/rest/collaborators/collaborators#get-repository-permissions-for-a-user
+  # https://stackoverflow.com/questions/1955505/parsing-json-with-unix-tools
