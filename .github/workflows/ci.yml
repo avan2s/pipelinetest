@@ -12,6 +12,7 @@ jobs:
     runs-on: [self-hosted]
     # Docker Hub image that `container-job` executes in
     container: node:lts-alpine
+    needs: [test-destroyer-job]
 
     # Service containers to run with `container-job`
     services:
@@ -64,6 +65,7 @@ jobs:
     if: ${{ true }}  # seto to false if for disable
     # Containers must run in Linux based operating systems
     runs-on: [self-hosted]
+    needs: [test-destroyer-job]
     # Docker Hub image that `container-job` executes in
     container: node:lts-alpine
 
@@ -127,7 +129,7 @@ jobs:
         run: whoami && sudo rm -Rf /baum
 
   build-backend-docker-image:
-    needs: [test-destroyer-job]
+    needs: [datbase-client-test-job,datbase-client-test-job2]
     runs-on: ubuntu-latest
     steps:
       -
