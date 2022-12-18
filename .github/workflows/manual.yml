@@ -38,6 +38,10 @@ jobs:
     if: ${{ inputs.appEnvironment == 'qa' }}
     runs-on: [self-hosted]
     container: node:lts
+    env:
+          RELEASE_TYPE: ${{ inputs.releaseType }}
+          ENVIRONMENT: ${{ inputs.appEnvironment }}
+          ONLY_DATABASE: ${{ inputs.isOnlyDatabase }} 
     steps:
       - name: qa step
         run: echo "iam on production $RELEASE_TYPE"
@@ -46,10 +50,13 @@ jobs:
     if: ${{ inputs.appEnvironment == 'pro' }}
     runs-on: [self-hosted]
     container: node:lts
+    env:
+          RELEASE_TYPE: ${{ inputs.releaseType }}
+          ENVIRONMENT: ${{ inputs.appEnvironment }}
+          ONLY_DATABASE: ${{ inputs.isOnlyDatabase }}
     steps:
       - name: production step
         run: echo "iam on production $RELEASE_TYPE"
-
 
   log-the-inputs:
     runs-on: [self-hosted]
