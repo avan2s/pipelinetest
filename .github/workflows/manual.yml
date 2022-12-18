@@ -17,9 +17,9 @@ on:
         default: 'minor'
         type: choice
         options:
-        - minor
         - major
-        - fixes
+        - minor
+        - patch
 
       
       isOnlyDatabase:
