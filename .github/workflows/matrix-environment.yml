@@ -1,5 +1,5 @@
 
-name: Test Secrets Output
+name: Environment/VAR and Secrets Output
 
 on:
   workflow_dispatch:
