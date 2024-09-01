@@ -134,7 +134,8 @@ jobs:
           echo "Available configuration variables:"
           echo "${{ toJson(secrets) }}"
           echo "${{ toJson(vars) }}"
-          echo DB_URL: ${{ env.DB_URL }}
+          echo DB_URL: "${{ env.DB_URL }}"
+          echo DB_URL: '${{ env.DB_URL }}'
 
       - name: List environment variables
         run: |
