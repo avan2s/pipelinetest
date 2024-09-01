@@ -1,4 +1,4 @@
-name: Matrix Pipeline with Result Gathering
+name: Multiple outocmes
 
 on:
   push:
@@ -36,7 +36,6 @@ jobs:
         id: collect-results
         run: |
           echo "result_${{ matrix.environment }}=${{ steps.run-tests.outcome }}" >> $GITHUB_ENV
-          echo "results+=${{ steps.run-tests.outcome }} in ${{ matrix.environment }} " >> $GITHUB_OUTPUT
 
   gather-results:
     name: Gather Results
