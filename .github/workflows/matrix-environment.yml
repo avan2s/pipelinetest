@@ -29,7 +29,7 @@ jobs:
         # the parts like host are also listed here
         DB_URL: ${{ vars.DB_URL }}
         DB_WRITER_USERNAME: ${{ vars.DB_WRITER_USERNAME }}
-        # DB_WRITER_PASSWORD: ${{ secrets.DB_WRITER_PASSWORD }}
+        DB_WRITER_PASSWORD: ${{ secrets.DB_WRITER_PASSWORD }}
         DB_HOST: ${{ vars.DB_HOST }}
     steps:
       - name: Output Secrets
