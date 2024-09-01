@@ -27,7 +27,7 @@ jobs:
         DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         # in order to make interpolation work for db url pattern, make sure
         # the parts like host are also listed here
-        DB_URL_PATTERN: ${{ vars.DB_URL_PATTERN }}
+        DB_URL_PATTERN: ${{ vars.DB_URL }}
         DB_HOST: ${{ vars.DB_HOST }}
     steps:
       - name: Output Secrets
