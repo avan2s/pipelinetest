@@ -15,6 +15,7 @@ on:
 
 jobs:
   print-output-per-environment:
+    if: false
     name: print hard coded environments from a matrix
     runs-on: ubuntu-latest
     strategy:
