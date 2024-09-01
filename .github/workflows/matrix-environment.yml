@@ -67,7 +67,7 @@ jobs:
           run: |
             matrix_output=$(find ${{env.DEPLOYMENT_CONFIGS_DIR}} -type f -name 'ci.tenant.env' -not -path '*/shared/*' | while read -r file; do
               customer_name=$(basename $(dirname "$file"))
-              echo "{\"path\":\"$file\", \"customer\":\"$customer_name\", \"customerEnv\": \"$(echo ${{inputs.deployEnvironment}}_${customer_name}\"},"
+              echo "{\"path\":\"$file\", \"customer\":\"$customer_name\", \"customerEnv\": \"$(echo ${{inputs.deployEnvironment}}_${customer_name})\"},"
             done | sed '$ s/,$//')
             matrix_output=$(echo "[$matrix_output]")
             echo value=${matrix_output} >> $GITHUB_OUTPUT
