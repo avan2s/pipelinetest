@@ -29,6 +29,7 @@ jobs:
       - name: Output Secrets
         run: |
           echo 'Host: ${{ env.DB_HOST }}'
+          echo ${{env.DB_URL_PATTERN}}
           dbPassword=${{ env.DB_PASSWORD }}
           echo "unmasked dbPw: ${dbPassword:0:1} ${dbPassword:1}"
 
