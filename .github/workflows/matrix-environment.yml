@@ -29,15 +29,15 @@ jobs:
         # the parts like host are also listed here
         DB_URL: ${{ vars.DB_URL }}
         DB_WRITER_USERNAME: ${{ vars.DB_WRITER_USERNAME }}
-        DB_WRITER_PASSWORD: ${{ secrets.DB_WRITER_PASSWORD }}
+        # DB_WRITER_PASSWORD: ${{ secrets.DB_WRITER_PASSWORD }}
         DB_HOST: ${{ vars.DB_HOST }}
     steps:
       - name: Output Secrets
         run: |
           echo 'Host: ${{ env.DB_HOST }}'
           echo ${{env.DB_URL}}
-          dbPassword=${{ env.DB_WRITER_PASSWORD }}
-          echo "unmasked dbPw: ${dbPassword:0:1} ${dbPassword:1}"
+          # dbPassword=${{ env.DB_WRITER_PASSWORD }}
+          # echo "unmasked dbPw: ${dbPassword:0:1} ${dbPassword:1}"
 
 #   extract-tenant-configs:
 #     name: Extracts tenants config path, customer and customerEnvironment
