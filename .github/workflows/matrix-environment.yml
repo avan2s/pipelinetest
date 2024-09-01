@@ -117,10 +117,10 @@ jobs:
       BASE_CONFIG: "./deployment-configs/shared/base-tenant.config.yml"
       CONFIG_FILE_TEMPLATE: "./deployment-configs/shared/tenant.config.template.yml"
       DB_PASSWORD: ${{secrets.DB_PASSWORD}}
-      DB_URL: ${{ vars.DB_URL }}
+      DB_URL: "${{ vars.DB_URL }}"
       DB_WRITER_USERNAME: ${{ vars.DB_WRITER_USERNAME }}
       DB_WRITER_PASSWORD: ${{ secrets.DB_WRITER_PASSWORD }}
-      DB_HOST: ${{ vars.DB_HOST }}
+      DB_HOST: "${{ vars.DB_HOST }}"
       DATABASE_NAME: ${{ vars.DATABASE_NAME }}
       DB_PORT: ${{ (inputs.deployEnvironment == 'pro' && 6432) || 5432 }}
       HAS_PG_BOUNCER: ${{ (inputs.deployEnvironment == 'pro' && true) || false }}
