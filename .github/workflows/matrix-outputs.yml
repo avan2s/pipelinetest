@@ -22,6 +22,9 @@ jobs:
           version="${{ matrix.version }}"
           echo "foo_${version}=${version}" >> "$GITHUB_OUTPUT"
           echo "output_${version}=${version}" >> "$GITHUB_OUTPUT"
+      - name: gen_outcome 
+        run: |
+          echo "results+=${{ steps.gen_output.outcome }} in ${{ matrix.version }} " >> $GITHUB_OUTPUT
   job2:
     runs-on: ubuntu-latest
     needs: [job1]
@@ -32,4 +35,7 @@ jobs:
       #   "output_2": "2",
       #   "output_3": "3"
       # }
-      - run: echo '${{ toJSON(needs.job1.outputs) }}'
+      - run: |
+          echo '${{ toJSON(needs.job1.outputs) }}'
+          echo '${{ needs.job1.outputs.results }}'
+          echo '${{ needs.job1.outputs.foo_1 }}'
