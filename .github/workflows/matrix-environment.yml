@@ -133,6 +133,8 @@ jobs:
           echo "Available configuration variables:"
           echo "${{ toJson(secrets) }}"
           echo "${{ toJson(vars) }}"
+          echo DB_URL: ${{ env.DB_URL }}
+
       - name: List environment variables
         run: |
           envsubst "$(printf '${%s} ' $(env | cut -d'=' -f1))" --variables | xargs -L4 | column -t
