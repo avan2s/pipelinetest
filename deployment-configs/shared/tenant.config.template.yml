@@ -2,7 +2,7 @@
   description: "${TENANT_NAME}"
   active: ${IS_TENANT_ACTIVE}
   datasource:
-    dbUrl: "${DATABASE_URL}"
+    dbUrl: "${DB_URL}"
   azureBlob:
     - azureConnectionString: "${PAYLOADS_AZURE_BLOB_CONNECTION_STRING}"
       azureContainerName: "${PAYLOADS_AZURE_BLOB_CONTAINER_NAME}"

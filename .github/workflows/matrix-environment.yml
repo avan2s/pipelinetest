@@ -98,27 +98,36 @@ jobs:
             echo value_${{matrix.customerEnv}}="{\"successful\": true, \"customer\": \"$customer\"}" >> $GITHUB_OUTPUT
             echo 'result=true' >> $GITHUB_OUTPUT
             echo "customer=$customer" >> $GITHUB_OUTPUT
+        # - name: substitute configFile
+        #   run: |
+        #     grep -oP '\$\{[^}]+\}' "$file" | sed 's/^\${\(.*\)}$/\1/' | sort -u
             
-#   substitute-config-file:
-#     needs: [print-env-customer-secrets, extract-tenant-configs]
-#     runs-on: ubuntu-latest
-#     env:
-#       CONFIG_FILE: "./deployment-configs/shared/config.yml"
-#       CONFIG_FILE_TEMPLATE: "./deployment-configs/shared/config-template.yml"
-#       DB_PASSWORD: ${{secrets.DB_PASSWORD}}
-#     strategy:
-#       matrix:
-#         include: ${{ fromJson(needs.extract-tenant-configs.outputs.matrix) }}
-#     environment: ${{matrix.customerEnv}}
-#     name: substitution
-#     steps:
-#       - uses: actions/checkout@v4
-#       - name: List all configuration variables
-#         run: |
-#           echo "Available configuration variables:"
-#           echo "${{ toJson(secrets) }}"
-#           echo "${{ toJson(vars) }}"
-#       - name: Replace config file
-#         run: |
-#           envsubst < "${{ env.CONFIG_FILE_TEMPLATE }}" > "${{ env.CONFIG_FILE }}"
-#           cat ${{env.CONFIG_FILE}}
+            
+  tenant-config-file-creation:
+    needs: [print-env-customer-secrets, extract-tenant-configs]
+    runs-on: ubuntu-latest
+    name: substitution
+    strategy:
+      matrix:
+        include: ${{ fromJson(needs.extract-tenant-configs.outputs.tenantConfigMatrix) }}
+    environment: ${{matrix.customerEnv}}
+    env:
+      CONFIG_FILE: ${{matrix.path}}
+      INTERPOLATED_CONFIG_FILE: ${{ matrix.customerEnv }}-tenant.config.template.yml
+      BASE_CONFIG: "./deployment-configs/shared/base-tenant.config.yml"
+      CONFIG_FILE_TEMPLATE: "./deployment-configs/shared/tenant.config.template.yml"
+      DB_PASSWORD: ${{secrets.DB_PASSWORD}}
+    steps:
+      - uses: actions/checkout@v4
+      - name: List all configuration variables
+        run: |
+          echo "Available configuration variables:"
+          echo "${{ toJson(secrets) }}"
+          echo "${{ toJson(vars) }}"
+      - name: List environment variables
+        run: |
+          envsubst "$(printf '${%s} ' $(env | cut -d'=' -f1))" --variables | xargs -L4 | column -t
+      - name: Replace config file
+        run: |
+          envsubst < "${{ env.CONFIG_FILE_TEMPLATE }}" > ${{ env.INTERPOLATED_CONFIG_FILE }}
+          cat ${{ env.INTERPOLATED_CONFIG_FILE }}
