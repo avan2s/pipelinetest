@@ -28,9 +28,9 @@ jobs:
     steps:
       - name: Output Secrets
         run: |
-          echo ${{ env.DB_HOST }}
-          echo 'dbPassword: ${{ env.DB_PASSWORD }}'
-          echo "unmasked dbPw: ${${{ env.DB_PASSWORD }}:0:1} ${${{env.DB_PASSWORD}}:1}"
+          echo 'Host: ${{ env.DB_HOST }}'
+          dbPassword=${{ env.DB_PASSWORD }}
+          echo "unmasked dbPw: ${dbPassword:0:1} ${dbPassword:1}"
 
 #   extract-tenant-configs:
 #     name: Extracts tenants config path, customer and customerEnvironment
