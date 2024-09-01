@@ -33,13 +33,18 @@ jobs:
         DB_HOST: ${{ vars.DB_HOST }}
         DATABASE_NAME: ${{ vars.DATABASE_NAME }}
         DB_PORT: ${{ (inputs.deployEnvironment == 'pro' && 6432) || 5432 }}
+        HAS_PG_BOUNCER: ${{ (inputs.deployEnvironment == 'pro' && true) || false }}
+        CUSTOMER_SHORTNAME: ${{ vars.CUSTOMER_SHORTNAME }} 
+        DB_CONNECTION_LIMIT: ${{ vars.DB_CONNECTION_LIMIT || 2 }}
+        
     steps:
       - name: Output Secrets
         run: |
           echo 'Host: ${{ env.DB_HOST }}'
+          # will be masked before the host starts
           echo "${{env.DB_URL}}"
-          # dbPassword=${{ env.DB_WRITER_PASSWORD }}
-          # echo "unmasked dbPw: ${dbPassword:0:1} ${dbPassword:1}"
+          dbPassword=${{ env.DB_WRITER_PASSWORD }}
+          echo "unmasked dbPw: ${dbPassword:0:1} ${dbPassword:1}"
 
 #   extract-tenant-configs:
 #     name: Extracts tenants config path, customer and customerEnvironment
