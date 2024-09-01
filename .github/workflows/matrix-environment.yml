@@ -1,0 +1,107 @@
+
+name: Test Secrets Output
+
+on:
+  workflow_dispatch:
+    inputs:
+      deployEnvironment:
+        type: choice
+        description: the target environment to deploy
+        required: true
+        options:
+          - pro
+          - qa
+
+
+jobs:
+  test-secret-output:
+    name: print hard coded environments from a matrix
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: [pro_customer1, pro_customer2, qa_customer1, qa_customer2]
+    environment: ${{ matrix.environment }}
+    env:
+        SECRET_NAMES: ${{ toJson(secrets) }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_HOST: ${{ vars.DB_HOST }}
+    steps:
+      - name: Output Secrets
+        run: |
+          echo ${{ env.DB_HOST }}
+          echo 'dbPassword: ${{ env.DB_PASSWORD }}'
+          echo 'unmasked dbPw: ${${{ env.DB_PASSWORD }}:0:1} ${${{env.DB_PASSWORD}}:1}'
+
+#   extract-tenant-configs:
+#     name: Extracts tenants config path, customer and customerEnvironment
+#     runs-on: ubuntu-latest
+
+#     outputs:
+#       matrix: ${{ steps.matrix.outputs.value }}
+
+#     steps:
+#         - uses: actions/checkout@v4
+#         - id: matrix
+#         # this will return an array of objects, which represends a matrix to include
+#         # [
+#         # {"path":"deployment-configs/QA/customer1/ci.tenant.env", "customer":"customer1", "customerEnv": QA_CUSTOMER1},
+#         # {"path":"deployment-configs/QA/customer2/ci.tenant.env", "customer":"customer2", "customerEnv": QA_CUSTOMER2}
+#         # ]
+#           name: create tenant config matrix
+#           run: |
+#             matrix_output=$(find deployment-configs/${{inputs.deployEnvironment}} -type f -name 'ci.tenant.env' -not -path '*/shared/*' | while read -r file; do
+#               customer_name=$(basename $(dirname "$file"))
+#               echo "{\"path\":\"$file\", \"customer\":\"$customer_name\", \"customerEnv\": \"$(echo ${{inputs.deployEnvironment}}_${customer_name}|tr '[:lower:]' '[:upper:]')\"},"
+#             done | sed '$ s/,$//')
+#             matrix_output=$(echo "[$matrix_output]")
+#             echo value=${matrix_output} >> $GITHUB_OUTPUT
+  
+#   print-env-customer-secrets:
+#     needs: [extract-tenant-configs]
+#     runs-on: ubuntu-latest
+#     name: print customer environment specific secrets
+#     strategy:
+#       matrix:
+#         include: ${{ fromJson(needs.extract-tenant-configs.outputs.matrix) }}
+#     environment: ${{matrix.customerEnv}}
+#     env:
+#       DB_PASSWORD: ${{secrets.DB_PASSWORD}}
+#     outputs:
+#       result: ${{ steps.outputSecrets.outputs.result }}
+#       customer: ${{ steps.outputSecrets.outputs.customer }}
+#     steps:
+#         - name: Output Secrets
+#           id: outputSecrets
+#           run: |
+#             echo ${{matrix.customer}}
+#             echo ${{matrix.customerEnv}}
+#             echo ${{secrets.DB_PASSWORD}}
+#             # in order to prevent log masking we put a whitespace inside
+#             echo ${DB_PASSWORD:0:1} ${DB_PASSWORD:1} 
+#             echo value="{\"successful\": true, \"customer\": \"$customer\"}" >> $GITHUB_OUTPUT
+#             echo 'result=true' >> $GITHUB_OUTPUT
+#             echo "customer=$customer" >> $GITHUB_OUTPUT
+            
+#   substitute-config-file:
+#     needs: [print-env-customer-secrets, extract-tenant-configs]
+#     runs-on: ubuntu-latest
+#     env:
+#       CONFIG_FILE: "./deployment-configs/shared/config.yml"
+#       CONFIG_FILE_TEMPLATE: "./deployment-configs/shared/config-template.yml"
+#       DB_PASSWORD: ${{secrets.DB_PASSWORD}}
+#     strategy:
+#       matrix:
+#         include: ${{ fromJson(needs.extract-tenant-configs.outputs.matrix) }}
+#     environment: ${{matrix.customerEnv}}
+#     name: substitution
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: List all configuration variables
+#         run: |
+#           echo "Available configuration variables:"
+#           echo "${{ toJson(secrets) }}"
+#           echo "${{ toJson(vars) }}"
+#       - name: Replace config file
+#         run: |
+#           envsubst < "${{ env.CONFIG_FILE_TEMPLATE }}" > "${{ env.CONFIG_FILE }}"
+#           cat ${{env.CONFIG_FILE}}
