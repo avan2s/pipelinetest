@@ -31,11 +31,12 @@ jobs:
         DB_WRITER_USERNAME: ${{ vars.DB_WRITER_USERNAME }}
         DB_WRITER_PASSWORD: ${{ secrets.DB_WRITER_PASSWORD }}
         DB_HOST: ${{ vars.DB_HOST }}
+        DATABASE_NAME: ${{ vars.DATABASE_NAME }}
     steps:
       - name: Output Secrets
         run: |
           echo 'Host: ${{ env.DB_HOST }}'
-          echo ${{env.DB_URL}}
+          echo "${{env.DB_URL}}"
           # dbPassword=${{ env.DB_WRITER_PASSWORD }}
           # echo "unmasked dbPw: ${dbPassword:0:1} ${dbPassword:1}"
 
