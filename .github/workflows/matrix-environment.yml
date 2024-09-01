@@ -41,6 +41,7 @@ jobs:
       - name: Output Secrets
         run: |
           echo 'Host: ${{ env.DB_HOST }}'
+          echo ${{toJson(secrets)}}
           # will be masked before the host starts
           echo "${{env.DB_URL}}"
           dbPassword=${{ env.DB_WRITER_PASSWORD }}

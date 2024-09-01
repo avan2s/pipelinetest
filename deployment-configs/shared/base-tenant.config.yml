@@ -1,0 +1,9 @@
+# and npm run db:pull uses this variable for just pulling the schema
+# backend
+APP_PROFILES: "PRO,BTP"
+# empty because it will be picked from the tenant database configs,
+# just for letting prisma not crash when generating the client
+DATABASE_URL: ""
+TENANT_CONFIGS:
+  tenantConfigs:
+# configs for each tenant - keep this comment

@@ -1,0 +1,33 @@
+- subaccountId: "${SUBACCOUNTID}"
+  description: "${TENANT_NAME}"
+  active: ${IS_TENANT_ACTIVE}
+  datasource:
+    dbUrl: "${DATABASE_URL}"
+  azureBlob:
+    - azureConnectionString: "${PAYLOADS_AZURE_BLOB_CONNECTION_STRING}"
+      azureContainerName: "${PAYLOADS_AZURE_BLOB_CONTAINER_NAME}"
+      topic: "Payloads"
+    - azureConnectionString: "${DOCUMENT_FILES_AZURE_BLOB_CONNECTION_STRING}"
+      azureContainerName: "${DOCUMENT_FILES_AZURE_BLOB_CONTAINER_NAME}"
+      topic: "DocumentFiles"
+  documentIntelligence:
+    endpoint: "${DOCUMENT_INTELLIGENCE_ENDPOINT}"
+    key: "${DOCUMENT_INTELLIGENCE_KEY}"
+  integrationEndpoints:
+    - topic: "ExtractedDocumentsTransmit"
+      url: ${ENDPOINT_EXTRACTED_DOCUMENTS_TRANSMIT_URL}
+      authType: ${ENDPOINT_EXTRACTED_DOCUMENTS_TRANSMIT_AUTH_TYPE}
+      username: ${ENDPOINT_EXTRACTED_DOCUMENTS_TRANSMIT_USERNAME}
+      password: ${ENDPOINT_EXTRACTED_DOCUMENTS_TRANSMIT_PASSWORD}
+  elastic:
+    url: "${ELASTIC_URL}"
+    username: "${ELASTIC_USERNAME}"
+    password: "${ELASTIC_PASSWORD}"
+    environmentAliasMapping: ${ELASTIC_ENV_ALIAS_MAPPING}
+  httpDestinations:
+    - topic: "CUSTOMER_CATALOG"
+      url: "${CUSTOMER_CATALOG_ENDPOINT_URL}"
+      auth:
+        clientId: "${CUSTOMER_CATALOG_CLIENT_ID}"
+        clientSecret: "${CUSTOMER_CATALOG_CLIENT_SECRET}"
+        tokenUrl: "${CUSTOMER_CATALOG_TOKEN_URL}"
