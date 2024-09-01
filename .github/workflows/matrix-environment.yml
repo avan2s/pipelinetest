@@ -41,7 +41,7 @@ jobs:
       - name: Output Secrets
         run: |
           echo 'Host: ${{ env.DB_HOST }}'
-          echo ${{toJson(secrets)}}
+          # echo ${{toJson(secrets)}}
           # will be masked before the host starts
           echo "${{env.DB_URL}}"
           dbPassword=${{ env.DB_WRITER_PASSWORD }}
@@ -103,7 +103,7 @@ jobs:
         #     grep -oP '\$\{[^}]+\}' "$file" | sed 's/^\${\(.*\)}$/\1/' | sort -u
             
             
-  tenant-config-file-creation:
+  tenant-config-file-substitution:
     needs: [print-env-customer-secrets, extract-tenant-configs]
     runs-on: ubuntu-latest
     name: substitution
