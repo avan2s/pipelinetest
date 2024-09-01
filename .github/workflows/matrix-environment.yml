@@ -24,7 +24,6 @@ jobs:
     env:
         SECRET_NAMES: ${{ toJson(secrets) }}
         VARIABLES: ${{ toJson(vars) }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         # in order to make interpolation work for db url pattern, make sure
         # the parts like host are also listed here
         DB_URL: ${{ vars.DB_URL }}
@@ -117,6 +116,16 @@ jobs:
       BASE_CONFIG: "./deployment-configs/shared/base-tenant.config.yml"
       CONFIG_FILE_TEMPLATE: "./deployment-configs/shared/tenant.config.template.yml"
       DB_PASSWORD: ${{secrets.DB_PASSWORD}}
+      DB_URL: ${{ vars.DB_URL }}
+      DB_WRITER_USERNAME: ${{ vars.DB_WRITER_USERNAME }}
+      DB_WRITER_PASSWORD: ${{ secrets.DB_WRITER_PASSWORD }}
+      DB_HOST: ${{ vars.DB_HOST }}
+      DATABASE_NAME: ${{ vars.DATABASE_NAME }}
+      DB_PORT: ${{ (inputs.deployEnvironment == 'pro' && 6432) || 5432 }}
+      HAS_PG_BOUNCER: ${{ (inputs.deployEnvironment == 'pro' && true) || false }}
+      CUSTOMER_SHORTNAME: ${{ vars.CUSTOMER_SHORTNAME }} 
+      DB_CONNECTION_LIMIT: ${{ vars.DB_CONNECTION_LIMIT || 2 }}
+        
     steps:
       - uses: actions/checkout@v4
       - name: List all configuration variables
