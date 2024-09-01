@@ -25,8 +25,10 @@ jobs:
         SECRET_NAMES: ${{ toJson(secrets) }}
         VARIABLES: ${{ toJson(vars) }}
         DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        # DB_HOST: ${{ vars.DB_HOST }}
+        # in order to make interpolation work for db url pattern, make sure
+        # the parts like host are also listed here
         DB_URL_PATTERN: ${{ vars.DB_URL_PATTERN }}
+        DB_HOST: ${{ vars.DB_HOST }}
     steps:
       - name: Output Secrets
         run: |
