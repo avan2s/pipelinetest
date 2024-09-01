@@ -32,6 +32,7 @@ jobs:
         DB_WRITER_PASSWORD: ${{ secrets.DB_WRITER_PASSWORD }}
         DB_HOST: ${{ vars.DB_HOST }}
         DATABASE_NAME: ${{ vars.DATABASE_NAME }}
+        DB_PORT: ${{ (inputs.deployEnvironment == 'pro' && 6432) || 5432 }}
     steps:
       - name: Output Secrets
         run: |
